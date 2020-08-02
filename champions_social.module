@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains champions_social.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function champions_social_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the champions_social module.
+    case 'help.page.champions_social':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Drupal 8 Module showing social media icons with links to social media profiles') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function champions_social_theme() {
+  return [
+    'champions_social' => [
+      'render element' => 'children',
+      'variables' => [
+        'conten' => null,
+        'base_path' => base_path(),
+        'module_path' => drupal_get_path('module', 'champions_social')
+      ]
+    ],
+  ];
+}

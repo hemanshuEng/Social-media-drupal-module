@@ -1,0 +1,5 @@
+name: 'Champions Social'
+type: module
+description: 'Drupal 8 Module showing social media icons with links to social media profiles'
+core: 8.x
+package: 'Custom'

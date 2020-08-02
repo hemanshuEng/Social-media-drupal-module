@@ -1,0 +1,13 @@
+{
+    "name": "champions_social",
+    "type": "drupal-module",
+    "description": "Drupal 8 Module showing social media icons with links to social media profiles",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/champions_social",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/champions_social",
+        "source": "http://cgit.drupalcode.org/champions_social",
+    },
+}
