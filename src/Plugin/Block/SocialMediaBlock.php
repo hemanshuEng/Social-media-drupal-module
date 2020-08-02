@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Drupal\champions_social\Plugin\Block;
 
@@ -57,13 +58,5 @@ class SocialMediaBlock extends BlockBase {
 
     return $build;
   }
-//  /**
-//   * {@inheritdoc}
-//   */
-//  public function build() {
-//    return array(
-//      '#markup' => $this->t('Hello, World!'),
-//    );
-//  }
 
 }
