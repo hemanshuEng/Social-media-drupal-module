@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace Drupal\champions_social\Plugin\Block;
 
+use Drupal\champions_social\SocialMedia\PlatformManager;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'SocialMediaBlock' block.
@@ -15,7 +18,27 @@ use Drupal\Core\Form\FormStateInterface;
  *  admin_label = @Translation("Social Media Block"),
  * )
  */
-class SocialMediaBlock extends BlockBase {
+class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterface{
+
+  /**
+   * @var PlatformManager
+   */
+  private $platform_manager;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, PlatformManager $platform_manager)
+  {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->platform_manager = $platform_manager;
+  }
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition)
+  {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('champions_social.platform')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -32,6 +55,8 @@ class SocialMediaBlock extends BlockBase {
 
     $form = parent::blockForm($form, $form_state);
     $config = $this->getConfiguration();
+    $platforms = $this->platform_manager->getPlatforms();
+
     $form['drupal_boilerplate_title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title'),
@@ -58,5 +83,6 @@ class SocialMediaBlock extends BlockBase {
 
     return $build;
   }
+
 
 }
