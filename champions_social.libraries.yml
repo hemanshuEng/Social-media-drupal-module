@@ -1,0 +1,4 @@
+champions_social.theme:
+  css:
+    theme:
+      css/champions_social.theme.css: {}
