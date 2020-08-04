@@ -56,12 +56,24 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
     $form = parent::blockForm($form, $form_state);
     $config = $this->getConfiguration();
     $platforms = $this->platform_manager->getPlatforms();
-
-    $form['drupal_boilerplate_title'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Title'),
-      '#default_value' => isset($config['drupal_boilerplate_title']) ? $config['drupal_boilerplate_title'] : '',
+    $form['platforms'] = [
+      '#type' => 'table',
+      '#header' => [
+        $this->t('Platform'),
+        $this->t('URL')
+      ]
     ];
+    foreach ($platforms as $id => $platform) {
+      $form['platforms'][$id]['label'] = [
+        '#markup' => $platform['instance']->getName()
+      ];
+      $form['platforms'][$id]['channel_name'] = [
+        '#type' => 'textfield',
+        '#default_value' => $config['platforms'][$id]['channel_name'] ?? '' ,
+        '#field_prefix' => $platform['instance']->getUrlPrefix(),
+        '#field_suffix' => $platform['instance']->getUrlSuffix(),
+      ];
+    }
     return $form;
   }
 
@@ -69,7 +81,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->configuration['drupal_boilerplate_title'] = $form_state->getValue('drupal_boilerplate_title');
+    $this->configuration['platforms'] = $form_state->getValue('platforms');
   }
 
   /**

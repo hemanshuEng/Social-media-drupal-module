@@ -27,7 +27,7 @@ class PlatformBase extends PluginBase implements PlatformInterface
     }
 
   /**
-   *
+   * @return string
    */
   public function getName()
     {
@@ -35,18 +35,18 @@ class PlatformBase extends PluginBase implements PlatformInterface
     }
 
   /**
-   *
+   * @return string
    */
   public function getUrlSuffix()
     {
-      return $this->pluginDefinition['urlSuffix'];
+      return $this->pluginDefinition['urlSuffix'] ?? '';
     }
 
   /**
-   *
+   * @return string
    */
   public function getUrlPrefix()
     {
-        return $this->pluginDefinition['urlPrefix'];
+        return $this->pluginDefinition['urlPrefix'] ?? '';
     }
 }
