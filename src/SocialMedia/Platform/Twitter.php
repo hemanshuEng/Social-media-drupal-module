@@ -5,16 +5,18 @@ namespace Drupal\champions_social\SocialMedia\Platform;
 
 use Drupal\champions_social\Annotation\Platform;
 use Drupal\champions_social\SocialMedia\PlatformBase;
+
+
 /**
- * Provides 'GooglePlus' platform.
+ * Provides 'facebook' platform.
  *
  * @Platform(
- *   id = "google",
- *   name = @Translation("Google+"),
- *   urlPrefix = "https://plus.google.com/",
+ *   id = "twitter",
+ *   name = @Translation("Twitter"),
+ *   urlPrefix = "https://www.twitter.com/",
  * )
  */
-class Google extends PlatformBase
+class Twitter extends PlatformBase
 {
 
 }

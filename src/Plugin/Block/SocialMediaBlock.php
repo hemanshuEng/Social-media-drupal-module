@@ -69,6 +69,8 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
       ];
       $form['platforms'][$id]['channel_name'] = [
         '#type' => 'textfield',
+        '#title' => $platform['instance']->getName(),
+        '#title_display' => 'invisible',
         '#default_value' => $config['platforms'][$id]['channel_name'] ?? '' ,
         '#field_prefix' => $platform['instance']->getUrlPrefix(),
         '#field_suffix' => $platform['instance']->getUrlSuffix(),
@@ -89,9 +91,14 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
    */
   public function build() {
     $config = $this->getConfiguration();
-    $build = [];
-    $build['#theme'] = 'champions_social';
-    $build['#conten'] = !empty($config['drupal_boilerplate_title']) ? $config['drupal_boilerplate_title'] : '';
+    $platforms = $this->platform_manager->getPlatforms();
+    $platforms_data = [];
+    foreach ($platforms as $id => $platform) {
+      $platforms_data[$id]['url'] =  $platform['instance']->getUrlPrefix() . $config['platforms'][$id]['channel_name'] . $platform['instance']->getUrlSuffix();
+      $platforms_data[$id]['name'] = $platform['instance']->getId();
+    }
+    $build['#theme'] = "champions_social";
+    $build['#platforms'] = $platforms_data;
 
     return $build;
   }

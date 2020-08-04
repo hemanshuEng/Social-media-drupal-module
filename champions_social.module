@@ -31,7 +31,7 @@ function champions_social_theme() {
     'champions_social' => [
       'render element' => 'children',
       'variables' => [
-        'conten' => null,
+        'platforms' => [],
         'base_path' => base_path(),
         'module_path' => drupal_get_path('module', 'champions_social')
       ]

@@ -1,3 +1,5 @@
 <!-- Add you custom twig html here -->
-<h2>My Custom Block {{ conten}}</h2>
-<a href="https://www.google.com"><img src="{{ module_path }}/images/facebook2.svg"></a>
+{% for platform in platforms %}
+   <a href={{ platform.url }} target="_blank" ><img src="{{ module_path }}/images/{{ platform.name }}.svg" alt="{{ platform.name }}"></a>
+{% endfor %}
+
