@@ -7,6 +7,10 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 
+function champions_social_page_attachments(&$page)
+{
+  $page['#attached']['library'][] = 'champions_social/champions_social.theme';
+}
 /**
  * Implements hook_help().
  */
@@ -32,9 +36,15 @@ function champions_social_theme() {
       'render element' => 'children',
       'variables' => [
         'platforms' => [],
+        'icon' => [],
         'base_path' => base_path(),
         'module_path' => drupal_get_path('module', 'champions_social')
-      ]
-    ],
-  ];
+      ],
+      '#attached' => [
+        'library' => [
+          'champions_social/champions_social.theme',
+        ],
+      ],
+  ]
+];
 }

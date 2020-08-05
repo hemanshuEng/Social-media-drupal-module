@@ -78,7 +78,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
         '#field_suffix' => $platform['instance']->getUrlSuffix(),
       ];
     }
-    $iconsetStyles = ['Iconmoon','Flaticon', 'Orion'];
+    $iconsetStyles = ['Iconmoon'=>'Iconmoon','Flaticon' => 'Flaticon', 'Orion' => 'Orion'];
 
     $form['icon'] = [
       '#type' => 'details',
@@ -88,8 +88,8 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
     $form['icon']['style'] = [
       '#type' => 'select',
       '#title' => $this->t('Choose Icon Style'),
-      '#default_value' => isset($config['icon']['style']) ? $config['icon']['style'] : '',
-      '#options' => $iconsetStyles,
+      '#default_value' => isset($config['icon']['style']) ? $config['icon']['style'] : 'Iconmoon',
+      '#options' => $iconsetStyles
     ];
     $form['icon']['table'] = [
       '#type' => 'table',
@@ -119,6 +119,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['platforms'] = $form_state->getValue('platforms');
+    $this->configuration['icon'] = $form_state->getValue('icon');
   }
 
   /**
@@ -131,9 +132,11 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
     foreach ($platforms as $id => $platform) {
       $platforms_data[$id]['url'] =  $platform['instance']->getUrlPrefix() . $config['platforms'][$id]['channel_name'] . $platform['instance']->getUrlSuffix();
       $platforms_data[$id]['name'] = $platform['instance']->getId();
+      $platforms_data[$id]['channel_name'] =  $config['platforms'][$id]['channel_name'];
     }
     $build['#theme'] = "champions_social";
     $build['#platforms'] = $platforms_data;
+    $build['#icon'] = $config['icon']['style'] ?? 'Iconmoon';
 
     return $build;
   }

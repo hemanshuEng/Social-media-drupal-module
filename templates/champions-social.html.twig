@@ -1,5 +1,10 @@
 <!-- Add you custom twig html here -->
+<div class ="champions-social-container">
 {% for platform in platforms %}
-   <a href={{ platform.url }} target="_blank" ><img src="{{ module_path }}/images/{{ platform.name }}.svg" alt="{{ platform.name }}"></a>
+  {% if platform.channel_name %}
+   <a class = "champions-social-links" href={{ platform.url }} target="_blank" >
+     <img class="champions-social-img" src="{{ module_path }}/images/{{ icon }}/{{ platform.name }}.svg" alt="{{ platform.name }}">
+   </a>
+  {% endif %}
 {% endfor %}
-
+</div>
