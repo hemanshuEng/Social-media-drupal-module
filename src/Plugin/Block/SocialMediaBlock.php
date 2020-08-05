@@ -4,10 +4,12 @@ declare(strict_types=1);
 namespace Drupal\champions_social\Plugin\Block;
 
 use Drupal\champions_social\SocialMedia\PlatformManager;
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -75,6 +77,39 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
         '#field_prefix' => $platform['instance']->getUrlPrefix(),
         '#field_suffix' => $platform['instance']->getUrlSuffix(),
       ];
+    }
+    $iconsetStyles = ['Iconmoon','Flaticon', 'Orion'];
+
+    $form['icon'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Icon Select'),
+      '#open' => TRUE,
+    ];
+    $form['icon']['style'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Choose Icon Style'),
+      '#default_value' => isset($config['icon']['style']) ? $config['icon']['style'] : '',
+      '#options' => $iconsetStyles,
+    ];
+    $form['icon']['table'] = [
+      '#type' => 'table',
+      '#header' => [
+        $this->t('Icon'),
+        $this->t('Icon Example')
+      ]
+    ];
+    foreach ( $iconsetStyles as $icon) {
+      $form['icon']['table'][$icon]['label'] = [
+        '#markup' => '<strong>' . $icon . '</strong>'
+      ];
+      foreach ($platforms as $id => $platform) {
+        $form['icon']['table'][$icon]['example'][$id]['label']  = [
+          '#markup' => new FormattableMarkup('<img class="socialmedia" src="@image" width="32" height="32" style="padding: 15px;"/>', [
+            '@image' =>  file_create_url(drupal_get_path('module', 'champions_social').'/images/' . $icon . '/' . $id .'.svg')
+          ])
+        ];
+      }
+
     }
     return $form;
   }
