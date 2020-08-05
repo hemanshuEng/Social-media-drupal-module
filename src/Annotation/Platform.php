@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Drupal\champions_social\Annotation;
@@ -11,19 +12,24 @@ namespace Drupal\champions_social\Annotation;
 class Platform extends \Drupal\Component\Annotation\Plugin
 {
   /**
+   * id for Platform ( name of platform)
    * @var string
    */
-   public $id;
+    public $id;
   /**
+   * Name of platform
+   * It will display on block Form
    * @var string
    */
-   public $name;
+    public $name;
    /**
+    * platform url prefix
     * @var string
     */
-   public $urlPrefix;
+    public $urlPrefix;
    /**
+    * platform url suffix
     * @var string
     */
-   public $urlSuffix;
+    public $urlSuffix;
 }
