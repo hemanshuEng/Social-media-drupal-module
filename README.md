@@ -1,7 +1,13 @@
-#Social Media Block    
+#Social Media Block
 ###plugin
 ####Description
 Add social media link , choose icon and layout of block
+
+#### improvement
+- Add more choice in Icon
+- add unittest
+- size options
+- improve validation
 
 ###Docker container for development
 
