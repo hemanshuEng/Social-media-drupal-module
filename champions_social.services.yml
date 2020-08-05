@@ -1,12 +1,4 @@
 services:
-#    acme.demo.example:
-#        class:     Acme\DemoBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-#        calls:
-#            - [setService, ["@service_id"]]
-#        tags:
-#            - { name: twig.extension }
-#            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
   champions_social.platform:
     class: Drupal\champions_social\SocialMedia\PlatformManager
     parent: default_plugin_manager

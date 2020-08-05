@@ -37,6 +37,7 @@ function champions_social_theme() {
       'variables' => [
         'platforms' => [],
         'icon' => [],
+        'layout' => '',
         'base_path' => base_path(),
         'module_path' => drupal_get_path('module', 'champions_social')
       ],

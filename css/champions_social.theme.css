@@ -18,3 +18,9 @@
   text-decoration: none !important;
   border: none !important;
 }
+.horizontal {
+  flex-direction: row;
+}
+.vertical {
+  flex-direction: column;
+}

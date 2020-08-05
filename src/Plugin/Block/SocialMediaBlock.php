@@ -9,7 +9,6 @@ use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -109,8 +108,16 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
           ])
         ];
       }
-
     }
+    $form['layout'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Choose Layout Style'),
+      '#default_value' => isset($config['layout']) ? $config['layout'] : 'horizontal',
+      '#options' => [
+        'vertical' => 'vertical',
+        'horizontal' => 'horizontal'
+      ]
+    ];
     return $form;
   }
 
@@ -120,6 +127,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
   public function blockSubmit($form, FormStateInterface $form_state) {
     $this->configuration['platforms'] = $form_state->getValue('platforms');
     $this->configuration['icon'] = $form_state->getValue('icon');
+    $this->configuration['layout'] = $form_state->getValue('layout');
   }
 
   /**
@@ -137,6 +145,7 @@ class SocialMediaBlock extends BlockBase implements ContainerFactoryPluginInterf
     $build['#theme'] = "champions_social";
     $build['#platforms'] = $platforms_data;
     $build['#icon'] = $config['icon']['style'] ?? 'Iconmoon';
+    $build['#layout'] = $config['layout'] ?? 'horizontal';
 
     return $build;
   }

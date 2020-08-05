@@ -1,5 +1,5 @@
 <!-- Add you custom twig html here -->
-<div class ="champions-social-container">
+<div class ="champions-social-container {{ layout }}">
 {% for platform in platforms %}
   {% if platform.channel_name %}
    <a class = "champions-social-links" href={{ platform.url }} target="_blank" >
