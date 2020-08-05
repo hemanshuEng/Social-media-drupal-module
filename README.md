@@ -1,6 +1,6 @@
-#Social Media Block
-###plugin
-####Description
+# Social Media Block
+### plugin
+#### Description
 Add social media link , choose icon and layout of block
 
 #### improvement
@@ -9,9 +9,9 @@ Add social media link , choose icon and layout of block
 - size options
 - improve validation
 
-###Docker container for development
+### Docker container for development
 
-####Docker for drupal
+#### Docker for drupal
 https://github.com/mogtofu33/docker-compose-drupal
 
 - docker has mysql, xdebug, drupal console etc...
@@ -24,7 +24,7 @@ https://github.com/mogtofu33/docker-compose-drupal
 
 - [Composer](https://getcomposer.org)
 
-##Setup
+## Setup
 
 - clone
   ```
